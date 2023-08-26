@@ -1,20 +1,20 @@
+const CALORIE_CHART = {
+  pushup: 7,
+  chinup: 8,
+  squat: 4,
+};
+
 class CalorieTracker {
-  #calorie;
+  #target;
   #history;
 
   constructor(target) {
-    this.#calorie = target;
+    this.#target = target;
     this.#history = {};
   }
 
   #calculateCaloriesBurned(exerciseName, duration) {
-    const chart = {
-      pushup: 7,
-      chinup: 8,
-      squat: 4,
-    };
-
-    return chart[exerciseName] * duration;
+    return CALORIE_CHART[exerciseName] * duration;
   }
 
   #updateExerciseHistory(exerciseName, duration) {
@@ -26,12 +26,12 @@ class CalorieTracker {
   }
 
   showRemainingTarget() {
-    return this.#calorie;
+    return this.#target;
   }
 
   addExercise(exerciseName, duration) {
     const calorieBurned = this.#calculateCaloriesBurned(exerciseName, duration);
-    this.#calorie -= calorieBurned;
+    this.#target -= calorieBurned;
     this.#updateExerciseHistory(exerciseName, duration);
   }
 }
