@@ -1,0 +1,28 @@
+#! /bin/bash
+
+cp ./bin/pre-commit .git/hooks
+PRE_COMMIT_SUCCESS_CODE=$?
+chmod u+x .git/hooks/pre-commit
+
+npm install
+NPM_INSTALL_SUCCESS_CODE=$?
+
+# npm run coverage
+
+# open ./coverage/index.html
+
+echo
+if [ $PRE_COMMIT_SUCCESS_CODE -eq 0 ]
+then
+echo -e "\033[32m✅ pre commit file copied sucessFull\033[0m"
+else
+echo -e "\033[31m❌ pre commit file copying failed\033[0m"
+fi
+
+echo
+if [ $NPM_INSTALL_SUCCESS_CODE -eq 0 ]
+then
+echo -e "\033[32m✅ Installed npm dependencies\033[0m"
+else
+echo -e "\033[31m❌ npm dependency installations failed\033[0m"
+fi

@@ -1,0 +1,26 @@
+{
+  "name": "calorie-counter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "eslint .",
+    "start": "node server.js",
+    "coverage": "nyc node --test",
+    "dev": "node --watch server.js",
+    "setup": "./bin/setup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "nyc": "^15.1.0",
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {}
+}
