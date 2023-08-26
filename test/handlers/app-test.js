@@ -31,3 +31,16 @@ describe("POST /calorie-tracker/exercises", () => {
       .end(done);
   });
 });
+
+describe("GET /calorie-tracker/exercise-history", () => {
+  it("should give all exercise history", (_, done) => {
+    const app = createApp();
+
+    request(app)
+      .get("/calorie-tracker/exercise-history")
+      .expect(200)
+      .expect("content-type", /json/)
+      .expect({ pushup: 5, running: 10, squat: 8 })
+      .end(done);
+  });
+});
