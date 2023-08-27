@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <title>Calorie Tracker</title>
+  <link rel='stylesheet' href='/styles/calorie-tracker.css'>
+</head>
+
+<body>
+  <header>
+    <h1>Track Calorie</h1>
+    <section id="auth">
+      <div id="username">username</div>
+      <a href="/" id="logout-button">Logout</a>
+    </section>
+  </header>
+  <main>
+    <section id="calorie-result">
+      <div>
+        <p>
+        <h3>Target:</h3>
+        </p>
+        <p id="target">200 cal</p>
+      </div>
+      <div>
+        <p>
+        <h3>Achieved:</h3>
+        </p>
+        <p id="achieved">180 cal</p>
+      </div>
+    </section>
+
+    <section id="exercises">
+      <h2>Add Exercise count or duration</h2>
+      <table id="exercise-entries">
+        <thead>
+          <th>Exercise Name</th>
+          <th>Duration/Count</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pushups</td>
+            <td><input type="number" id="pushup-count"></td>
+          </tr>
+          <tr>
+            <td>Running</td>
+            <td><input type="number" id="running-duration"></td>
+          </tr>
+        </tbody>
+      </table>
+      <input type="button" value="submit" class="button">
+    </section>
+
+  </main>
+</body>
+
+</html>

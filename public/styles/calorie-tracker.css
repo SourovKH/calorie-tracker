@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: system-ui, "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  font-size: 20px;
+}
+
+header {
+  height: 3.2em;
+  padding: 0em 4em 0.3em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  background-color: rgb(182, 102, 117);
+}
+
+#auth {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#username {
+  font-size: 25px;
+}
+
+#logout-button {
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+#calorie-result {
+  width: 300px;
+  margin: 20px 0;
+}
+
+#calorie-result > div {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+#exercises {
+  margin: 50px 100px;
+  height: fit-content;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#exercise-entries {
+  width: 100%;
+  border-spacing: 10px;
+}
+
+td {
+  text-align: center;
+}
+
+.button {
+  font-size: 18px;
+  width: 80px;
+  height: 30px;
+}
