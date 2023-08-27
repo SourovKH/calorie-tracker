@@ -1,3 +1,36 @@
+const createHistoryElement = (exerciseDetails) => {
+  const historyElement = document.createElement("div");
+  historyElement.classList.add("exercise-details");
+
+  const exerciseElements = Object.entries(exerciseDetails).map(
+    ([exerciseName, durationOrCount]) => {
+      const exerciseElement = document.createElement("div");
+      exerciseElement.innerText = `${exerciseName}: ${durationOrCount}`;
+
+      return exerciseElement;
+    }
+  );
+
+  historyElement.append(...exerciseElements);
+  return historyElement;
+};
+
+const showHistory = (history) => {
+  const historyContainer = document.querySelector("#exercise-history");
+
+  history.forEach((exerciseDetails) => {
+    const historyElement = createHistoryElement(exerciseDetails);
+
+    historyContainer.appendChild(historyElement);
+  });
+};
+
+const fetchAndShowHistory = () => {
+  fetch("/calorie-tracker/exercise-history")
+    .then((res) => res.json())
+    .then((body) => showHistory(body));
+};
+
 const showTarget = (target) => {
   const targetElement = document.querySelector("#target");
   targetElement.innerText = `${target} cal`;
@@ -58,7 +91,10 @@ const submitExercises = () => {
 
   fetch("/calorie-tracker/exercises", request)
     .then((res) => res.json())
-    .then((body) => updateCalorieBoard(body.remainingCalorie));
+    .then((body) => {
+      updateCalorieBoard(body.remainingCalorie);
+      fetchAndShowHistory();
+    });
 };
 
 const handleExercises = () => {
@@ -71,6 +107,7 @@ const handleExercises = () => {
 };
 
 const main = () => {
+  fetchAndShowHistory();
   handleTargetSetter();
   handleExercises();
 };

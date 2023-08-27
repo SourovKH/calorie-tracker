@@ -40,7 +40,7 @@ describe("GET /calorie-tracker/exercise-history", () => {
       .get("/calorie-tracker/exercise-history")
       .expect(200)
       .expect("content-type", /json/)
-      .expect({ pushup: 5, running: 10, squat: 8 })
+      .expect([{ pushup: 5, running: 10, squat: 8 }])
       .end(done);
   });
 });
