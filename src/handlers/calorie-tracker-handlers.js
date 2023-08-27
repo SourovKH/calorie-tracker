@@ -20,4 +20,17 @@ const serveTrackingPage = (req, res) => {
   res.sendFile(`${pwd}/private/pages/calorie-tracker.html`);
 };
 
-module.exports = { updateExerciseHistory, getHistory, serveTrackingPage };
+const setTarget = (req, res) => {
+  const { target } = req.body;
+  console.log({ target });
+
+  res.status(204);
+  res.end();
+};
+
+module.exports = {
+  updateExerciseHistory,
+  getHistory,
+  serveTrackingPage,
+  setTarget,
+};

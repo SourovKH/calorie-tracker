@@ -56,3 +56,15 @@ describe("GET /calorie-tracker", () => {
       .end(done);
   });
 });
+
+describe("POST /calorie-tracker/target", () => {
+  it("should set target in calorie tracker", (_, done) => {
+    const app = createApp();
+
+    request(app)
+      .post("/calorie-tracker/target")
+      .send({ target: 300 })
+      .expect(204)
+      .end(done);
+  });
+});
