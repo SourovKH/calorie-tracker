@@ -13,9 +13,8 @@ describe("getUserDetails", () => {
 
     const storage = new Storage(fs);
     const user = new User("souma", 1, "s1");
-    const calorieTracker = new CalorieTracker(1);
 
-    const users = new Users([user], [calorieTracker], storage);
+    const users = new Users([user], [], storage);
     const userDetails = users.getUserDetails(1);
 
     const expected = {
@@ -27,3 +26,25 @@ describe("getUserDetails", () => {
   });
 });
 
+describe("addUser", () => {
+  it("should add user in users", (context) => {
+    const onStore = context.mock.fn();
+    const fs = {
+      writeFile: (path, content, onStore) => onStore(),
+    };
+
+    const storage = new Storage(fs);
+    const users = new Users([], [], storage);
+
+    const user = new User("skh", 2, "skh2");
+    users.addUser(user, onStore);
+    const userDetails = users.getUserDetails(2);
+
+    const expected = {
+      username: "skh",
+      userId: 2,
+      password: "skh2",
+    };
+    assert.deepStrictEqual(userDetails, expected);
+  });
+});

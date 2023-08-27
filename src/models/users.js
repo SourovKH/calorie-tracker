@@ -9,6 +9,19 @@ class Users {
     this.#storage = storage;
   }
 
+  #storeUsers(onStore) {
+    const userDetails = this.#users.map((user) => {
+      return user.getDetails();
+    });
+
+    this.#storage.storeUserDetails(userDetails, onStore);
+  }
+
+  addUser(user, onStore) {
+    this.#users.push(user);
+    this.#storeUsers(onStore);
+  }
+
   getUserDetails(userId) {
     console.log(this.#calorieTrackers, this.#storage);
     const user = this.#users.find(
