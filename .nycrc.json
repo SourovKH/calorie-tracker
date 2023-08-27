@@ -1,5 +1,5 @@
 {
   "all": true,
   "reporter": ["html", "text"],
-  "exclude": ["server.js", "coverage", ".eslintrc.js"]
+  "exclude": ["server.js", "coverage", ".eslintrc.js", "public"]
 }
