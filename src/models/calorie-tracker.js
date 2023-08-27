@@ -7,8 +7,10 @@ const CALORIE_CHART = {
 class CalorieTracker {
   #target;
   #history;
+  #id;
 
-  constructor() {
+  constructor(id) {
+    this.#id = id;
     this.#history = [];
   }
 
@@ -33,6 +35,10 @@ class CalorieTracker {
 
   set target(target) {
     this.#target = target;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get remainingTarget() {

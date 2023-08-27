@@ -13,6 +13,7 @@ const createApp = () => {
 
   app.post("/calorie-tracker/exercises", updateExerciseHistory);
   app.get("/calorie-tracker/exercise-history", getHistory);
+  
   app.use(express.static("public"));
   return app;
 };
