@@ -8,31 +8,35 @@ class CalorieTracker {
   #target;
   #history;
 
-  constructor(target) {
+  constructor() {
+    this.#history = [];
+  }
+
+  getHistory() {
+    return this.#history.map((hist) => {
+      return { ...hist };
+    });
+  }
+
+  #updateTarget(exercises) {
+    Object.entries(exercises).forEach(([exerciseName, durationOrCount]) => {
+      const calorieBurned = CALORIE_CHART[exerciseName] * durationOrCount;
+
+      this.#target -= calorieBurned;
+    });
+  }
+
+  addExercises(exercises) {
+    this.#updateTarget(exercises);
+    this.#history.push(exercises);
+  }
+
+  set target(target) {
     this.#target = target;
-    this.#history = {};
   }
 
-  #calculateCaloriesBurned(exerciseName, duration) {
-    return CALORIE_CHART[exerciseName] * duration;
-  }
-
-  #updateExerciseHistory(exerciseName, duration) {
-    this.#history[exerciseName] = duration;
-  }
-
-  showHistory() {
-    return { ...this.#history };
-  }
-
-  showRemainingTarget() {
+  get remainingTarget() {
     return this.#target;
-  }
-
-  addExercise(exerciseName, duration) {
-    const calorieBurned = this.#calculateCaloriesBurned(exerciseName, duration);
-    this.#target -= calorieBurned;
-    this.#updateExerciseHistory(exerciseName, duration);
   }
 }
 
