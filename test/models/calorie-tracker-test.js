@@ -10,7 +10,8 @@ describe("CalorieTracker", () => {
 
       strictEqual(tracker.id, 3);
     });
-  })
+  });
+
   describe("remainingTarget", () => {
     it("should give the remaining target", () => {
       const tracker = new CalorieTracker();
