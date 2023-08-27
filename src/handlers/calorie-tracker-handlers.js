@@ -14,4 +14,10 @@ const getHistory = (req, res) => {
   res.send(exerciseHistory);
 };
 
-module.exports = { updateExerciseHistory, getHistory };
+const serveTrackingPage = (req, res) => {
+  const pwd = process.env.PWD;
+
+  res.sendFile(`${pwd}/private/pages/calorie-tracker.html`);
+};
+
+module.exports = { updateExerciseHistory, getHistory, serveTrackingPage };
