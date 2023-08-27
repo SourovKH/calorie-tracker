@@ -3,7 +3,6 @@
   margin: 0;
   box-sizing: border-box;
   font-family: system-ui, "Segoe UI", "Open Sans", "Helvetica Neue", sans-serif;
-  /* border: 1px solid grey; */
 }
 
 body {
@@ -38,7 +37,7 @@ header {
 }
 
 main {
-  width: 400px;
+  width: 500px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
@@ -47,7 +46,7 @@ main {
 }
 
 #target-setter {
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -100,4 +99,21 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#exercise-history {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exercise-details {
+  display: flex;
+  gap: 30px;
 }
