@@ -36,14 +36,24 @@ header {
   color: white;
 }
 
+#target-setter {
+  margin: 30px 100px;
+  width: 400px;
+  display: flex;
+  gap: 10px;
+}
+
+#target-box {
+  padding-left: 5px;
+}
+
 #calorie-result {
-  width: 300px;
-  margin: 20px 0;
+  width: 400px;
+  margin: 20px 50px;
 }
 
 #calorie-result > div {
   display: flex;
-  gap: 1em;
   justify-content: space-between;
 }
 
@@ -57,13 +67,22 @@ header {
   gap: 20px;
 }
 
-#exercise-entries {
+#exercise-measurements {
   width: 100%;
-  border-spacing: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-td {
-  text-align: center;
+.exercise-measurement {
+  padding-left: 5px;
+}
+
+.exercise {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .button {
