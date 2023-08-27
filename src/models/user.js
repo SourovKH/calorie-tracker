@@ -9,7 +9,7 @@ class User {
     this.#password = password;
   }
 
-  getUserDetails() {
+  getDetails() {
     const username = this.#username;
     const password = this.#password;
     const userId = this.#userId;
@@ -17,3 +17,5 @@ class User {
     return { username, password, userId };
   }
 }
+
+module.exports = User;

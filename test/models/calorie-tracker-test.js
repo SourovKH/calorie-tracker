@@ -1,7 +1,7 @@
 const { describe, it } = require("node:test");
 const { strictEqual, deepStrictEqual } = require("assert");
 
-const { CalorieTracker } = require("../../src/models/calorie-tracker");
+const CalorieTracker = require("../../src/models/calorie-tracker");
 
 describe("CalorieTracker", () => {
   describe("id", () => {

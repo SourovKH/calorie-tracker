@@ -46,4 +46,4 @@ class CalorieTracker {
   }
 }
 
-exports.CalorieTracker = CalorieTracker;
+module.exports = CalorieTracker;
