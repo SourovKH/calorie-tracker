@@ -1,3 +1,6 @@
+const CalorieTracker = require("../models/calorie-tracker");
+const User = require("../models/user");
+
 const updateExerciseHistory = (req, res) => {
   const exercises = req.body;
   console.log(exercises);
@@ -37,13 +40,34 @@ const handleLogin = (req, res) => {
   const users = req.app.users;
 
   const validation = users.validateUser(username, password);
-
+  console.log(validation);
   if (validation.username && validation.password) {
-    res.cookie("uerId", `${username}-${password}}`);
+    res.cookie("userId", `${username}-${password}`);
   }
 
   res.type("json");
   res.send({ location: "/", ...validation });
+};
+
+const serveSignupPage = (req, res) => {
+  const pwd = process.env.PWD;
+
+  res.sendFile(`${pwd}/private/pages/signup.html`);
+};
+
+const registerUser = (req, res) => {
+  const { users, calorieTrackers } = req.app;
+  const { username, password } = req.body;
+  const userId = `${username}-${password}}`;
+
+  const user = new User(username, userId, password);
+  console.log(user.getDetails());
+  users.addUser(user);
+
+  const calorieTracker = new CalorieTracker(userId);
+  calorieTrackers.addCalorieTracker(calorieTracker);
+
+  res.redirect("login");
 };
 
 const setTarget = (req, res) => {
@@ -61,4 +85,6 @@ module.exports = {
   setTarget,
   serveLoginPage,
   handleLogin,
+  serveSignupPage,
+  registerUser,
 };

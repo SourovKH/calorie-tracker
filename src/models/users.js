@@ -32,7 +32,7 @@ class Users {
       return { username: false, password: false };
     }
 
-    if (user.password === password) {
+    if (user.getDetails().password === password) {
       return { username: true, password: true };
     }
 

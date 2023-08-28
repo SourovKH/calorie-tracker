@@ -9,6 +9,8 @@ const {
   setTarget,
   serveLoginPage,
   handleLogin,
+  serveSignupPage,
+  registerUser,
 } = require("./handlers/calorie-tracker-handlers");
 
 const createApp = (users, calorieTrackers, storage) => {
@@ -20,6 +22,7 @@ const createApp = (users, calorieTrackers, storage) => {
   app.use(logger);
   app.use(express.json());
   app.use(parseCookie);
+  app.use(express.urlencoded());
 
   app.post("/calorie-tracker/exercises", updateExerciseHistory);
   app.get("/calorie-tracker/exercise-history", getHistory);
@@ -28,6 +31,9 @@ const createApp = (users, calorieTrackers, storage) => {
 
   app.get("/login", serveLoginPage);
   app.post("/login", handleLogin);
+
+  app.get("/signup", serveSignupPage);
+  app.post("/signup", registerUser);
 
   app.use(express.static("public"));
   return app;
