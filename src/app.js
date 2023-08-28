@@ -7,8 +7,9 @@ const {
   setTarget,
 } = require("./handlers/calorie-tracker-handlers");
 
-const createApp = () => {
+const createApp = (controller) => {
   const app = express();
+  app.controller = controller;
 
   app.use(logger);
   app.use(express.json());

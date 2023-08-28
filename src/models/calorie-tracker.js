@@ -14,6 +14,10 @@ class CalorieTracker {
     this.#history = [];
   }
 
+  restoreHistory(history) {
+    this.#history = history;
+  }
+
   getHistory() {
     return this.#history.map((hist) => {
       return { ...hist };

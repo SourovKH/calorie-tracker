@@ -1,4 +1,4 @@
-class Users {
+class Controller {
   #users;
   #calorieTrackers;
   #storage;
@@ -23,7 +23,6 @@ class Users {
   }
 
   getUserDetails(userId) {
-    console.log(this.#calorieTrackers, this.#storage);
     const user = this.#users.find(
       (user) => user.getDetails().userId === userId
     );
@@ -57,4 +56,4 @@ class Users {
   }
 }
 
-module.exports = Users;
+module.exports = Controller;
