@@ -15,9 +15,35 @@ const getHistory = (req, res) => {
 };
 
 const serveTrackingPage = (req, res) => {
+  const { cookies } = req;
+
+  if (!cookies.userId) {
+    res.redirect(301, "/login");
+    return;
+  }
+
+  const pwd = process.env.PWD;
+  res.sendFile(`${pwd}/private/pages/calorie-tracker.html`);
+};
+
+const serveLoginPage = (req, res) => {
   const pwd = process.env.PWD;
 
-  res.sendFile(`${pwd}/private/pages/calorie-tracker.html`);
+  res.sendFile(`${pwd}/private/pages/login.html`);
+};
+
+const handleLogin = (req, res) => {
+  const { username, password } = req.body;
+  const users = req.app.users;
+
+  const validation = users.validateUser(username, password);
+
+  if (validation.username && validation.password) {
+    res.cookie("uerId", `${username}-${password}}`);
+  }
+
+  res.type("json");
+  res.send({ location: "/", ...validation });
 };
 
 const setTarget = (req, res) => {
@@ -33,4 +59,6 @@ module.exports = {
   getHistory,
   serveTrackingPage,
   setTarget,
+  serveLoginPage,
+  handleLogin,
 };

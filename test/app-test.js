@@ -51,8 +51,8 @@ describe("GET /calorie-tracker", () => {
 
     request(app)
       .get("/calorie-tracker")
-      .expect(200)
-      .expect("content-type", /html/)
+      .expect(301)
+      .expect("content-type", /plain/)
       .end(done);
   });
 });

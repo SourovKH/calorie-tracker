@@ -20,7 +20,7 @@
   border: 1px solid black;
 }
 
-#login-area > h1{
+#login-area > h1 {
   font-size: 30px;
 }
 
@@ -31,7 +31,8 @@ form {
   flex-direction: column;
 }
 
-#login-text-box, #password-text-box {
+#username-box,
+#password-box {
   height: 50px;
   padding-left: 5px;
   font-size: 20px;
@@ -42,4 +43,8 @@ form {
   height: 50px;
   font-size: 20px;
   border-radius: 50px;
+}
+
+.invalid-password {
+  border: 2px solid red;
 }

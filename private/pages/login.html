@@ -3,14 +3,15 @@
 <head>
   <title>Login</title>
   <link rel="stylesheet" href="/styles/login.css">
+  <script src="/scripts/login.js"></script>
 </head>
 
 <body>
   <section id="login-area">
     <h1>Login</h1>
-    <form action="/login" method="post">
-      <input type="text" name="username" placeholder="username" id="login-text-box" autofocus>
-      <input type="password" id="password-text-box" name="password" placeholder="password">
+    <form id="login">
+      <input type="text" name="username" placeholder="username" id="username-box" autofocus>
+      <input type="password" id="password-box" name="password" placeholder="password">
       <input type="submit" id="submit-button" value="Signup">
     </form>
   </section>

@@ -22,6 +22,22 @@ class Users {
       return user.getDetails();
     });
   }
+
+  validateUser(username, password) {
+    const user = this.#users.find(
+      (user) => user.getDetails().username === username
+    );
+
+    if (!user) {
+      return { username: false, password: false };
+    }
+
+    if (user.password === password) {
+      return { username: true, password: true };
+    }
+
+    return { username: true, password: false };
+  }
 }
 
 module.exports = Users;
