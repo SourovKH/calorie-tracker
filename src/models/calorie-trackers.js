@@ -26,6 +26,14 @@ class CalorieTrackers {
       return { history, id, remainingTarget };
     });
   }
+
+  setCalorie(trackerId, target) {
+    const tracker = this.#calorieTrackers.find((tracker) => {
+      return tracker.id === trackerId;
+    });
+
+    tracker.target = target;
+  }
 }
 
 module.exports = CalorieTrackers;

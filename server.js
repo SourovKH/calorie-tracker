@@ -4,6 +4,8 @@ const createApp = require("./src/app");
 const Storage = require("./src/models/storage");
 const CalorieTrackers = require("./src/models/calorie-trackers");
 const Users = require("./src/models/users");
+const User = require("./src/models/user");
+const CalorieTracker = require("./src/models/calorie-tracker");
 
 const createUsers = (userDetails) => {
   return userDetails.map((userDetail) => {

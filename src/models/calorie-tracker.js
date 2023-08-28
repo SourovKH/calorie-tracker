@@ -1,6 +1,6 @@
 const CALORIE_CHART = {
   pushup: 7,
-  chinup: 8,
+  running: 8,
   squat: 4,
 };
 

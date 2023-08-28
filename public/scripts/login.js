@@ -13,7 +13,6 @@ const submitUserDetails = () => {
   fetch("/login", request)
     .then((res) => res.json())
     .then((body) => {
-      console.log(body);
       if (!body.username) {
         window.location.href = "/";
         return;

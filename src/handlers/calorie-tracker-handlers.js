@@ -1,6 +1,16 @@
 const CalorieTracker = require("../models/calorie-tracker");
 const User = require("../models/user");
 
+const setTarget = (req, res) => {
+  const { target } = req.body;
+  const { calorieTrackers } = req.app;
+  const trackerId = req.cookies.userId;
+  calorieTrackers.setCalorie(trackerId, +target);
+
+  res.status(204);
+  res.end();
+};
+
 const updateExerciseHistory = (req, res) => {
   const exercises = req.body;
   console.log(exercises);
@@ -40,7 +50,7 @@ const handleLogin = (req, res) => {
   const users = req.app.users;
 
   const validation = users.validateUser(username, password);
-  console.log(validation);
+
   if (validation.username && validation.password) {
     res.cookie("userId", `${username}-${password}`);
   }
@@ -55,27 +65,31 @@ const serveSignupPage = (req, res) => {
   res.sendFile(`${pwd}/private/pages/signup.html`);
 };
 
+const storeUserAndTrackerDetails = (req, res) => {
+  const { users, calorieTrackers, storage } = req.app;
+
+  const userDetails = JSON.stringify(users.getUserDetails());
+  const trackerDetails = JSON.stringify(calorieTrackers.getTrackerDetails());
+
+  storage.storeUserDetails(userDetails, () => {
+    storage.storeTrackerDetails(trackerDetails, () => {
+      res.redirect("login");
+    });
+  });
+};
+
 const registerUser = (req, res) => {
   const { users, calorieTrackers } = req.app;
   const { username, password } = req.body;
-  const userId = `${username}-${password}}`;
+  const userId = `${username}-${password}`;
 
   const user = new User(username, userId, password);
-  console.log(user.getDetails());
   users.addUser(user);
 
   const calorieTracker = new CalorieTracker(userId);
   calorieTrackers.addCalorieTracker(calorieTracker);
 
-  res.redirect("login");
-};
-
-const setTarget = (req, res) => {
-  const { target } = req.body;
-  console.log({ target });
-
-  res.status(204);
-  res.end();
+  storeUserAndTrackerDetails(req, res);
 };
 
 module.exports = {

@@ -33,10 +33,10 @@ describe("CalorieTracker", () => {
 
     it("should add multiple exercises to the calorie tracker", () => {
       const tracker = new CalorieTracker(2);
-      tracker.target = 50;
-      tracker.addExercises({ chinup: 5, squat: 2 });
+      tracker.target = 70;
+      tracker.addExercises({ running: 5, squat: 2 });
 
-      const remainingTarget = 2;
+      const remainingTarget = 22;
       strictEqual(tracker.remainingTarget, remainingTarget);
     });
 
@@ -44,7 +44,7 @@ describe("CalorieTracker", () => {
       const tracker = new CalorieTracker(1);
       tracker.target = 100;
 
-      tracker.addExercises({ chinup: 5, squat: 6 });
+      tracker.addExercises({ running: 5, squat: 6 });
       tracker.addExercises({ pushup: 5 });
 
       const remainingTarget = 1;
@@ -65,19 +65,19 @@ describe("CalorieTracker", () => {
     it("should give history of multiple exercises when multiple exercises are added", () => {
       const tracker = new CalorieTracker(5);
       tracker.target = 70;
-      tracker.addExercises({ chinup: 5, squat: 6 });
+      tracker.addExercises({ running: 5, squat: 6 });
 
-      const expectedHistory = [{ chinup: 5, squat: 6 }];
+      const expectedHistory = [{ running: 5, squat: 6 }];
       deepStrictEqual(tracker.getHistory(), expectedHistory);
     });
 
     it("should give history when exercises are multiple times", () => {
       const tracker = new CalorieTracker(3);
       tracker.target = 100;
-      tracker.addExercises({ chinup: 5, squat: 6 });
+      tracker.addExercises({ running: 5, squat: 6 });
       tracker.addExercises({ pushup: 5 });
 
-      const expectedHistory = [{ chinup: 5, squat: 6 }, { pushup: 5 }];
+      const expectedHistory = [{ running: 5, squat: 6 }, { pushup: 5 }];
 
       deepStrictEqual(tracker.getHistory(), expectedHistory);
       strictEqual(tracker.remainingTarget, 1);

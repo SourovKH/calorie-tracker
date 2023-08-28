@@ -15,7 +15,7 @@ class Storage {
     });
   }
 
-  storeCalorieTrackerDetails(calorieTrackerDetails, onStore) {
+  storeTrackerDetails(calorieTrackerDetails, onStore) {
     this.#fs.writeFile(
       this.#calorieTrackerDatabasePath,
       calorieTrackerDetails,

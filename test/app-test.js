@@ -3,6 +3,10 @@ const { describe, it } = require("node:test");
 const request = require("supertest");
 
 const createApp = require("../src/app");
+const Storage = require("../src/models/storage");
+const CalorieTracker = require("../src/models/calorie-tracker");
+const CalorieTrackers = require("../src/models/calorie-trackers");
+const Users = require("../src/models/users");
 
 describe("GET /", () => {
   it("should get index page", (_, done) => {
@@ -59,10 +63,18 @@ describe("GET /calorie-tracker", () => {
 
 describe("POST /calorie-tracker/target", () => {
   it("should set target in calorie tracker", (_, done) => {
-    const app = createApp();
+    const fs = {};
+    const storage = new Storage(fs);
+    const users = new Users([]);
+
+    const calorieTrackers = new CalorieTrackers([]);
+    const calorieTracker = new CalorieTracker("s123");
+    calorieTrackers.addCalorieTracker(calorieTracker);
+    const app = createApp(users, calorieTrackers, storage);
 
     request(app)
       .post("/calorie-tracker/target")
+      .set("cookie", "userId=s123")
       .send({ target: 300 })
       .expect(204)
       .end(done);
