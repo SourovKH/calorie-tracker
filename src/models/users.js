@@ -38,6 +38,23 @@ class Users {
 
     return tracker.getHistory();
   }
+
+  #storeTrackers(onStore) {
+    const trackerDetails = this.#calorieTrackers.map((tracker) => {
+      const history = tracker.getHistory();
+      const id = tracker.id;
+      const remainingTarget = tracker.remainingTarget;
+
+      return { history, id, remainingTarget };
+    });
+
+    this.#storage.storeCalorieTrackerDetails(trackerDetails, onStore);
+  }
+
+  addCalorieTracker(calorieTracker, onStore) {
+    this.#calorieTrackers.push(calorieTracker);
+    this.#storeTrackers(onStore);
+  }
 }
 
 module.exports = Users;

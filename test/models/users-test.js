@@ -69,3 +69,22 @@ describe("getTrackerHistory", () => {
     assert.deepStrictEqual(users.getTrackerHistory(2), expected);
   });
 });
+
+describe("addCalorieTracker", () => {
+  it("should add a calorie tracker in trackers", (context) => {
+    const onStore = context.mock.fn();
+    const fs = {
+      writeFile: (path, content, onStore) => onStore(),
+    };
+    const storage = new Storage(fs);
+    const calorieTracker = new CalorieTracker(1);
+    calorieTracker.addExercises({ pushup: 5, squat: 8 });
+
+    const users = new Users([], [], storage);
+    users.addCalorieTracker(calorieTracker, onStore);
+
+    const expected = [{ pushup: 5, squat: 8 }];
+
+    assert.deepStrictEqual(users.getTrackerHistory(1), expected);
+  });
+});
