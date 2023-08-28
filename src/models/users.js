@@ -30,6 +30,14 @@ class Users {
 
     return user.getDetails();
   }
+
+  getTrackerHistory(trackerId) {
+    const tracker = this.#calorieTrackers.find((tracker) => {
+      return tracker.id === trackerId;
+    });
+
+    return tracker.getHistory();
+  }
 }
 
 module.exports = Users;

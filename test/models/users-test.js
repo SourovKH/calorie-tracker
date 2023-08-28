@@ -48,3 +48,24 @@ describe("addUser", () => {
     assert.deepStrictEqual(userDetails, expected);
   });
 });
+
+describe("getTrackerHistory", () => {
+  it("should give the exercises history of a calorie tracker", () => {
+    const fs = {};
+    const storage = new Storage(fs);
+    const calorieTracker1 = new CalorieTracker(1);
+    const calorieTracker2 = new CalorieTracker(2);
+
+    calorieTracker2.addExercises({ pushup: 5, squat: 8 });
+    calorieTracker2.addExercises({ pushup: 8, squat: 2 });
+
+    const users = new Users([], [calorieTracker1, calorieTracker2], storage);
+
+    const expected = [
+      { pushup: 5, squat: 8 },
+      { pushup: 8, squat: 2 },
+    ];
+
+    assert.deepStrictEqual(users.getTrackerHistory(2), expected);
+  });
+});
