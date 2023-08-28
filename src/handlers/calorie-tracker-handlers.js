@@ -11,17 +11,39 @@ const setTarget = (req, res) => {
   res.end();
 };
 
+const storeUserAndTrackerDetails = (req, _, onStore) => {
+  const { users, calorieTrackers, storage } = req.app;
+
+  const userDetails = JSON.stringify(users.getUserDetails());
+  const trackerDetails = JSON.stringify(calorieTrackers.getTrackerDetails());
+
+  storage.storeUserDetails(userDetails, () => {
+    storage.storeTrackerDetails(trackerDetails, () => {
+      onStore();
+    });
+  });
+};
+
 const updateExerciseHistory = (req, res) => {
   const exercises = req.body;
-  console.log(exercises);
+  const { calorieTrackers } = req.app;
+  const trackerId = req.cookies.userId;
 
-  res.type("json");
-  res.status(201);
-  res.send({ remainingCalorie: 40 });
+  const remainingTarget = calorieTrackers.addExercises(exercises, trackerId);
+
+  storeUserAndTrackerDetails(req, res, () => {
+    res.type("json");
+    res.status(201);
+    res.send({ remainingTarget });
+  });
 };
 
 const getHistory = (req, res) => {
-  const exerciseHistory = [{ pushup: 5, running: 10, squat: 8 }];
+  const { calorieTrackers } = req.app;
+  const trackerId = req.cookies.userId;
+
+  const exerciseHistory = calorieTrackers.getTrackerHistory(trackerId);
+
   res.type("json");
   res.status(200);
   res.send(exerciseHistory);
@@ -65,19 +87,6 @@ const serveSignupPage = (req, res) => {
   res.sendFile(`${pwd}/private/pages/signup.html`);
 };
 
-const storeUserAndTrackerDetails = (req, res) => {
-  const { users, calorieTrackers, storage } = req.app;
-
-  const userDetails = JSON.stringify(users.getUserDetails());
-  const trackerDetails = JSON.stringify(calorieTrackers.getTrackerDetails());
-
-  storage.storeUserDetails(userDetails, () => {
-    storage.storeTrackerDetails(trackerDetails, () => {
-      res.redirect("login");
-    });
-  });
-};
-
 const registerUser = (req, res) => {
   const { users, calorieTrackers } = req.app;
   const { username, password } = req.body;
@@ -89,7 +98,9 @@ const registerUser = (req, res) => {
   const calorieTracker = new CalorieTracker(userId);
   calorieTrackers.addCalorieTracker(calorieTracker);
 
-  storeUserAndTrackerDetails(req, res);
+  storeUserAndTrackerDetails(req, res, () => {
+    res.redirect("login");
+  });
 };
 
 module.exports = {

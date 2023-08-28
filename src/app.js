@@ -24,16 +24,16 @@ const createApp = (users, calorieTrackers, storage) => {
   app.use(parseCookie);
   app.use(express.urlencoded());
 
-  app.post("/calorie-tracker/exercises", updateExerciseHistory);
-  app.get("/calorie-tracker/exercise-history", getHistory);
-  app.get("/calorie-tracker", serveTrackingPage);
-  app.post("/calorie-tracker/target", setTarget);
-
   app.get("/login", serveLoginPage);
   app.post("/login", handleLogin);
 
   app.get("/signup", serveSignupPage);
   app.post("/signup", registerUser);
+
+  app.post("/calorie-tracker/exercises", updateExerciseHistory);
+  app.get("/calorie-tracker/exercise-history", getHistory);
+  app.get("/calorie-tracker", serveTrackingPage);
+  app.post("/calorie-tracker/target", setTarget);
 
   app.use(express.static("public"));
   return app;

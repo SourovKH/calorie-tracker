@@ -9,10 +9,14 @@ class CalorieTrackers {
     this.#calorieTrackers.push(calorieTracker);
   }
 
-  getTrackerHistory(trackerId) {
-    const tracker = this.#calorieTrackers.find((tracker) => {
+  findTracker(trackerId) {
+    return this.#calorieTrackers.find((tracker) => {
       return tracker.id === trackerId;
     });
+  }
+
+  getTrackerHistory(trackerId) {
+    const tracker = this.findTracker(trackerId);
 
     return tracker.getHistory();
   }
@@ -28,11 +32,15 @@ class CalorieTrackers {
   }
 
   setCalorie(trackerId, target) {
-    const tracker = this.#calorieTrackers.find((tracker) => {
-      return tracker.id === trackerId;
-    });
+    const tracker = this.findTracker(trackerId);
 
     tracker.target = target;
+  }
+
+  addExercises(exercises, trackerId) {
+    const tracker = this.findTracker(trackerId);
+    tracker.addExercises(exercises);
+    return tracker.remainingTarget;
   }
 }
 

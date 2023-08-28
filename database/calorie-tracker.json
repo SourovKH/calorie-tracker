@@ -1,1 +1,13 @@
-[{"history":[],"id":"sourov-12345","remainingTarget":0},{"history":[],"id":"sourov-12345","remainingTarget":0}]
+[
+  {
+    "history": [
+      { "pushup": 1, "running": 2, "squat": 3 },
+      { "pushup": 3, "running": 4, "squat": 3 },
+      { "pushup": 4, "running": 4, "squat": 3 },
+      { "pushup": 2, "running": 4, "squat": 3 },
+      { "pushup": 2, "running": 4, "squat": 3 }
+    ],
+    "id": "sourov-12345",
+    "remainingTarget": 705
+  }
+]

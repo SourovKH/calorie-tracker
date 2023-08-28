@@ -74,9 +74,9 @@ const getExerciseDetails = () => {
   return Object.fromEntries(exerciseDetails);
 };
 
-const updateCalorieBoard = (remainingCalorie) => {
+const updateCalorieBoard = (remainingTarget) => {
   const achieveElement = document.querySelector("#achieved");
-  achieveElement.innerText = `${remainingCalorie} cal`;
+  achieveElement.innerText = `${remainingTarget} cal`;
 };
 
 const submitExercises = () => {
@@ -92,7 +92,7 @@ const submitExercises = () => {
   fetch("/calorie-tracker/exercises", request)
     .then((res) => res.json())
     .then((body) => {
-      updateCalorieBoard(body.remainingCalorie);
+      updateCalorieBoard(body.remainingTarget);
       fetchAndShowHistory();
     });
 };

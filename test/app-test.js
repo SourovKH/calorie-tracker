@@ -24,24 +24,48 @@ describe("GET /", () => {
 
 describe("POST /calorie-tracker/exercises", () => {
   it("should store exercise data performed by user", (_, done) => {
-    const app = createApp();
+    const fs = {
+      writeFile: (path, content, onStore) => onStore(),
+    };
+    const storage = new Storage(fs);
+    const users = new Users([]);
+
+    const calorieTrackers = new CalorieTrackers([]);
+    const calorieTracker = new CalorieTracker("s123");
+    calorieTracker.target = 200;
+    calorieTrackers.addCalorieTracker(calorieTracker);
+
+    const app = createApp(users, calorieTrackers, storage);
 
     request(app)
       .post("/calorie-tracker/exercises")
+      .set("cookie", "userId=s123")
       .send({ pushup: 5, running: 10 })
       .expect(201)
       .expect("content-type", /json/)
-      .expect({ remainingCalorie: 40 })
+      .expect({ remainingTarget: 85 })
       .end(done);
   });
 });
 
 describe("GET /calorie-tracker/exercise-history", () => {
   it("should give all exercise history", (_, done) => {
-    const app = createApp();
+    const fs = {
+      writeFile: (path, content, onStore) => onStore(),
+    };
+    const storage = new Storage(fs);
+    const users = new Users([]);
+
+    const calorieTrackers = new CalorieTrackers([]);
+    const calorieTracker = new CalorieTracker("s123");
+    calorieTracker.addExercises({ pushup: 5, running: 10, squat: 8 });
+    calorieTrackers.addCalorieTracker(calorieTracker);
+
+    const app = createApp(users, calorieTrackers, storage);
 
     request(app)
       .get("/calorie-tracker/exercise-history")
+      .set("cookie", "userId=s123")
       .expect(200)
       .expect("content-type", /json/)
       .expect([{ pushup: 5, running: 10, squat: 8 }])
