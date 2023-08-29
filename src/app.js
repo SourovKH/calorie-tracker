@@ -11,6 +11,7 @@ const {
   handleLogin,
   serveSignupPage,
   registerUser,
+  logoutUser,
 } = require("./handlers/calorie-tracker-handlers");
 
 const createApp = (users, calorieTrackers, storage) => {
@@ -29,6 +30,8 @@ const createApp = (users, calorieTrackers, storage) => {
 
   app.get("/signup", serveSignupPage);
   app.post("/signup", registerUser);
+
+  app.get("/logout", logoutUser);
 
   app.post("/calorie-tracker/exercises", updateExerciseHistory);
   app.get("/calorie-tracker/exercise-history", getHistory);

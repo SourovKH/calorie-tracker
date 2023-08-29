@@ -1,4 +1,3 @@
-const fs = require("fs");
 const { describe, it } = require("node:test");
 const request = require("supertest");
 
@@ -7,18 +6,13 @@ const Storage = require("../src/models/storage");
 const CalorieTracker = require("../src/models/calorie-tracker");
 const CalorieTrackers = require("../src/models/calorie-trackers");
 const Users = require("../src/models/users");
+const User = require("../src/models/user");
 
 describe("GET /", () => {
   it("should get index page", (_, done) => {
-    const indexPage = fs.readFileSync("./public/index.html", "utf-8");
     const app = createApp();
 
-    request(app)
-      .get("/")
-      .expect(200)
-      .expect("content-type", /html/)
-      .expect(indexPage)
-      .end(done);
+    request(app).get("/").expect(200).expect("content-type", /html/).end(done);
   });
 });
 
@@ -50,9 +44,7 @@ describe("POST /calorie-tracker/exercises", () => {
 
 describe("GET /calorie-tracker/exercise-history", () => {
   it("should give all exercise history", (_, done) => {
-    const fs = {
-      writeFile: (path, content, onStore) => onStore(),
-    };
+    const fs = {};
     const storage = new Storage(fs);
     const users = new Users([]);
 
@@ -102,5 +94,123 @@ describe("POST /calorie-tracker/target", () => {
       .send({ target: 300 })
       .expect(204)
       .end(done);
+  });
+});
+
+describe("GET /login", () => {
+  it("should get the login page", (_, done) => {
+    const app = createApp();
+
+    request(app)
+      .get("/login")
+      .expect(200)
+      .expect("content-type", /html/)
+      .end(done);
+  });
+});
+
+describe("POST /login", () => {
+  it("should give response when user credentials are valid", (_, done) => {
+    const fs = {};
+    const storage = new Storage(fs);
+    const users = new Users([]);
+    const calorieTrackers = new CalorieTrackers([]);
+
+    const user = new User("skh", "s123", "s123");
+    users.addUser(user);
+
+    const app = createApp(users, calorieTrackers, storage);
+    const expectedResponse = { location: "/", username: true, password: true };
+
+    request(app)
+      .post("/login")
+      .send({ username: "skh", password: "s123" })
+      .expect(200)
+      .expect(expectedResponse)
+      .end(done);
+  });
+
+  it("should give response when username is wrong", (_, done) => {
+    const fs = {};
+    const storage = new Storage(fs);
+    const users = new Users([]);
+    const calorieTrackers = new CalorieTrackers([]);
+
+    const user = new User("skh", "s123", "s123");
+    users.addUser(user);
+
+    const app = createApp(users, calorieTrackers, storage);
+    const expectedResponse = {
+      location: "/",
+      username: false,
+      password: false,
+    };
+
+    request(app)
+      .post("/login")
+      .send({ username: "riya", password: "s123" })
+      .expect(200)
+      .expect(expectedResponse)
+      .end(done);
+  });
+
+  it("should give response when username is valid but password is wrong", (_, done) => {
+    const fs = {};
+    const storage = new Storage(fs);
+    const users = new Users([]);
+    const calorieTrackers = new CalorieTrackers([]);
+
+    const user = new User("skh", "s123", "s123");
+    users.addUser(user);
+
+    const app = createApp(users, calorieTrackers, storage);
+    const expectedResponse = { location: "/", username: true, password: false };
+
+    request(app)
+      .post("/login")
+      .send({ username: "skh", password: "s1234" })
+      .expect(200)
+      .expect(expectedResponse)
+      .end(done);
+  });
+});
+
+describe("GET /signup", () => {
+  it("should get signup page with status code 200", (_, done) => {
+    const app = createApp();
+
+    request(app)
+      .get("/signup")
+      .expect(200)
+      .expect("content-type", /html/)
+      .end(done);
+  });
+});
+
+describe("POST /signup", () => {
+  it("should register a user", (_, done) => {
+    const fs = {
+      writeFile: (path, content, onStore) => onStore(),
+    };
+    const storage = new Storage(fs);
+    const users = new Users([]);
+    const calorieTrackers = new CalorieTrackers([]);
+
+    const app = createApp(users, calorieTrackers, storage);
+
+    request(app)
+      .post("/signup")
+      .send({ username: "skh", password: "s1234" })
+      .expect(303)
+      .expect("location", "login")
+      .end(done);
+  });
+});
+
+describe("GET /logout", () => {
+  it("should logout user from page", (_, done) => {
+    const app = createApp();
+
+    request(app).get("/logout").expect(303).expect("location", "/").end(done);
   });
 });

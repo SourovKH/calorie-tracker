@@ -78,8 +78,7 @@ const handleLogin = (req, res) => {
     res.cookie("userId", `${username}-${password}`);
   }
 
-  res.type("json");
-  res.send({ location: "/", ...validation });
+  res.json({ location: "/", ...validation });
 };
 
 const serveSignupPage = (req, res) => {
@@ -100,8 +99,13 @@ const registerUser = (req, res) => {
   calorieTrackers.addCalorieTracker(calorieTracker);
 
   storeUserAndTrackerDetails(req, res, () => {
-    res.redirect("login");
+    res.redirect(303, "login");
   });
+};
+
+const logoutUser = (req, res) => {
+  res.clearCookie("userId");
+  res.redirect(303, "/");
 };
 
 module.exports = {
@@ -113,4 +117,5 @@ module.exports = {
   handleLogin,
   serveSignupPage,
   registerUser,
+  logoutUser,
 };
