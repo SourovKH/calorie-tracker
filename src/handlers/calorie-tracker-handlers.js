@@ -5,7 +5,8 @@ const setTarget = (req, res) => {
   const { target } = req.body;
   const { calorieTrackers } = req.app;
   const trackerId = req.cookies.userId;
-  calorieTrackers.setCalorie(trackerId, +target);
+
+  calorieTrackers.setTarget(trackerId, +target);
 
   res.status(204);
   res.end();
@@ -42,7 +43,7 @@ const getHistory = (req, res) => {
   const { calorieTrackers } = req.app;
   const trackerId = req.cookies.userId;
 
-  const exerciseHistory = calorieTrackers.getTrackerHistory(trackerId);
+  const exerciseHistory = calorieTrackers.getExerciseHistory(trackerId);
 
   res.type("json");
   res.status(200);

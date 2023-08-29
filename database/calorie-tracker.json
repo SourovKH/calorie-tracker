@@ -1,13 +1,1 @@
-[
-  {
-    "history": [
-      { "pushup": 1, "running": 2, "squat": 3 },
-      { "pushup": 3, "running": 4, "squat": 3 },
-      { "pushup": 4, "running": 4, "squat": 3 },
-      { "pushup": 2, "running": 4, "squat": 3 },
-      { "pushup": 2, "running": 4, "squat": 3 }
-    ],
-    "id": "sourov-12345",
-    "remainingTarget": 705
-  }
-]
+[{"history":[{"pushup":8,"running":10,"squat":14}],"id":"sourov-12345","remainingTarget":1008},{"history":[{"pushup":10,"running":10,"squat":8}],"id":"skh-12345","remainingTarget":818},{"history":[{"pushup":1,"running":2,"squat":3}],"id":"milan-12345","remainingTarget":165},{"history":[],"id":"riya-12345","remainingTarget":0}]

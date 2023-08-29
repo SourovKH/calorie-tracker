@@ -2,10 +2,10 @@ const fs = require("fs");
 
 const createApp = require("./src/app");
 const Storage = require("./src/models/storage");
-const CalorieTrackers = require("./src/models/calorie-trackers");
-const Users = require("./src/models/users");
 const User = require("./src/models/user");
+const Users = require("./src/models/users");
 const CalorieTracker = require("./src/models/calorie-tracker");
+const CalorieTrackers = require("./src/models/calorie-trackers");
 
 const createUsers = (userDetails) => {
   return userDetails.map((userDetail) => {

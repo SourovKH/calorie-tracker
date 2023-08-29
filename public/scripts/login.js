@@ -14,7 +14,7 @@ const submitUserDetails = () => {
     .then((res) => res.json())
     .then((body) => {
       if (!body.username) {
-        window.location.href = "/";
+        window.location.href = "/signup";
         return;
       }
 
