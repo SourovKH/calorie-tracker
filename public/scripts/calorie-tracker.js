@@ -17,6 +17,7 @@ const createHistoryElement = (exerciseDetails) => {
 
 const showHistory = (history) => {
   const historyContainer = document.querySelector("#history");
+  historyContainer.innerHtml = "";
 
   history.forEach((exerciseDetails) => {
     const historyElement = createHistoryElement(exerciseDetails);
@@ -67,6 +68,7 @@ const getExerciseDetails = () => {
   const exerciseDetails = [...exerciseElements].map((exerciseElement) => {
     const exerciseName = exerciseElement.name;
     const exerciseMeasurement = exerciseElement.value;
+    exerciseElement.value = 0;
 
     return [exerciseName, +exerciseMeasurement];
   });

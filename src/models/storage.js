@@ -10,19 +10,19 @@ class Storage {
   }
 
   storeUserDetails(userDetails, onStore) {
-    this.#fs.writeFile(this.#userDatabasePath, userDetails, () => {
+    const content = JSON.stringify(userDetails);
+
+    this.#fs.writeFile(this.#userDatabasePath, content, () => {
       onStore();
     });
   }
 
   storeTrackerDetails(calorieTrackerDetails, onStore) {
-    this.#fs.writeFile(
-      this.#calorieTrackerDatabasePath,
-      calorieTrackerDetails,
-      () => {
-        onStore();
-      }
-    );
+    const content = JSON.stringify(calorieTrackerDetails);
+
+    this.#fs.writeFile(this.#calorieTrackerDatabasePath, content, () => {
+      onStore();
+    });
   }
 
   getUserDetails() {

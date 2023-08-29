@@ -15,8 +15,8 @@ const setTarget = (req, res) => {
 const storeUserAndTrackerDetails = (req, _, onStore) => {
   const { users, calorieTrackers, storage } = req.app;
 
-  const userDetails = JSON.stringify(users.getUserDetails());
-  const trackerDetails = JSON.stringify(calorieTrackers.getTrackerDetails());
+  const userDetails = users.getUserDetails();
+  const trackerDetails = calorieTrackers.getTrackerDetails();
 
   storage.storeUserDetails(userDetails, () => {
     storage.storeTrackerDetails(trackerDetails, () => {
@@ -78,7 +78,7 @@ const handleLogin = (req, res) => {
     res.cookie("userId", `${username}-${password}`);
   }
 
-  res.json({ location: "/", ...validation });
+  res.json({ location: "/calorie-tracker", ...validation });
 };
 
 const serveSignupPage = (req, res) => {
@@ -99,7 +99,8 @@ const registerUser = (req, res) => {
   calorieTrackers.addCalorieTracker(calorieTracker);
 
   storeUserAndTrackerDetails(req, res, () => {
-    res.redirect(303, "login");
+    res.cookie("userId", `${username}-${password}`);
+    res.redirect(303, "/calorie-tracker");
   });
 };
 

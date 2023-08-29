@@ -9,14 +9,10 @@ class CalorieTracker {
   #history;
   #id;
 
-  constructor(id) {
+  constructor(id, history = []) {
     this.#id = id;
-    this.#history = [];
-    this.#target = 0;
-  }
-
-  restoreHistory(history) {
     this.#history = history;
+    this.#target = 0;
   }
 
   getHistory() {

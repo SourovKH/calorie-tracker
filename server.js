@@ -17,9 +17,8 @@ const createUsers = (userDetails) => {
 const createCalorieTrackers = (trackerDetails) => {
   return trackerDetails.map((trackerDetail) => {
     const { history, id, remainingTarget } = trackerDetail;
-    const calorieTracker = new CalorieTracker(id);
+    const calorieTracker = new CalorieTracker(id, history);
 
-    calorieTracker.restoreHistory(history);
     calorieTracker.target = remainingTarget;
 
     return calorieTracker;

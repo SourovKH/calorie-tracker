@@ -120,7 +120,7 @@ describe("POST /login", () => {
     users.addUser(user);
 
     const app = createApp(users, calorieTrackers, storage);
-    const expectedResponse = { location: "/", username: true, password: true };
+    const expectedResponse = { location: "/calorie-tracker", username: true, password: true };
 
     request(app)
       .post("/login")
@@ -141,7 +141,7 @@ describe("POST /login", () => {
 
     const app = createApp(users, calorieTrackers, storage);
     const expectedResponse = {
-      location: "/",
+      location: "/calorie-tracker",
       username: false,
       password: false,
     };
@@ -164,7 +164,7 @@ describe("POST /login", () => {
     users.addUser(user);
 
     const app = createApp(users, calorieTrackers, storage);
-    const expectedResponse = { location: "/", username: true, password: false };
+    const expectedResponse = { location: "/calorie-tracker", username: true, password: false };
 
     request(app)
       .post("/login")

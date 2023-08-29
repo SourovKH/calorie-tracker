@@ -39,6 +39,7 @@ const createApp = (users, calorieTrackers, storage) => {
   app.post("/calorie-tracker/target", setTarget);
 
   app.use(express.static("public"));
+
   return app;
 };
 
