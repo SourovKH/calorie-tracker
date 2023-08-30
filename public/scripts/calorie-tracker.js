@@ -17,7 +17,7 @@ const createHistoryElement = (exerciseDetails) => {
 
 const showHistory = (history) => {
   const historyContainer = document.querySelector("#history");
-  historyContainer.innerHtml = "";
+  historyContainer.innerText = "";
 
   history.forEach((exerciseDetails) => {
     const historyElement = createHistoryElement(exerciseDetails);

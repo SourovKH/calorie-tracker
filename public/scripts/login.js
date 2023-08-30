@@ -4,28 +4,23 @@ const submitUserDetails = () => {
 
   const request = {
     method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
+    headers: { "content-type": "application/json" },
     body: JSON.stringify({ username, password }),
   };
 
   fetch("/login", request)
-    .then((res) => res.json())
-    .then((body) => {
-      if (!body.username) {
-        window.location.href = "/signup";
+    .then((res) => {
+      if (res.redirected) {
+        location.replace(res.url);
         return;
       }
-
-      if (!body.password) {
-        document
-          .querySelector("#password-box")
-          .classList.add("invalid-password");
-        return;
+      return res.json();
+    })
+    .then(({ username, password }) => {
+      if (!username || !password) {
+        const invalidMsgElement = document.querySelector("#invalid-message");
+        invalidMsgElement.innerText = "Invalid Credentials";
       }
-
-      window.location.href = body.location;
     });
 };
 

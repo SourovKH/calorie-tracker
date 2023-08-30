@@ -33,9 +33,9 @@ const createApp = (users, calorieTrackers, storage) => {
 
   app.get("/logout", logoutUser);
 
+  app.get("/calorie-tracker", serveTrackingPage);
   app.post("/calorie-tracker/exercises", updateExerciseHistory);
   app.get("/calorie-tracker/exercise-history", getHistory);
-  app.get("/calorie-tracker", serveTrackingPage);
   app.post("/calorie-tracker/target", setTarget);
 
   app.use(express.static("public"));

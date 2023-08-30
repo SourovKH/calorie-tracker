@@ -120,13 +120,12 @@ describe("POST /login", () => {
     users.addUser(user);
 
     const app = createApp(users, calorieTrackers, storage);
-    const expectedResponse = { location: "/calorie-tracker", username: true, password: true };
 
     request(app)
       .post("/login")
       .send({ username: "skh", password: "s123" })
-      .expect(200)
-      .expect(expectedResponse)
+      .expect(302)
+      .expect("location", "/calorie-tracker")
       .end(done);
   });
 
@@ -141,7 +140,6 @@ describe("POST /login", () => {
 
     const app = createApp(users, calorieTrackers, storage);
     const expectedResponse = {
-      location: "/calorie-tracker",
       username: false,
       password: false,
     };
@@ -164,7 +162,10 @@ describe("POST /login", () => {
     users.addUser(user);
 
     const app = createApp(users, calorieTrackers, storage);
-    const expectedResponse = { location: "/calorie-tracker", username: true, password: false };
+    const expectedResponse = {
+      username: true,
+      password: false,
+    };
 
     request(app)
       .post("/login")
@@ -202,7 +203,7 @@ describe("POST /signup", () => {
       .post("/signup")
       .send({ username: "skh", password: "s1234" })
       .expect(303)
-      .expect("location", "login")
+      .expect("location", "/calorie-tracker")
       .end(done);
   });
 });

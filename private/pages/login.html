@@ -10,9 +10,15 @@
   <section id="login-area">
     <h1>Login</h1>
     <form id="login">
-      <input type="text" name="username" placeholder="username" id="username-box" autofocus>
-      <input type="password" id="password-box" name="password" placeholder="password">
-      <input type="submit" id="submit-button" value="Login">
+      <div id="input-area">
+        <input type="text" name="username" placeholder="Username" id="username-box" autofocus required>
+        <input type="password" id="password-box" name="password" placeholder="Password" required>
+        <span id="invalid-message"></span>
+      </div>
+      <div>
+        <input type="submit" id="submit-button" value="Login">
+        <span>Don't have account? <a href="/signup">Create Account</a></span>
+      </div>
     </form>
   </section>
 </body>

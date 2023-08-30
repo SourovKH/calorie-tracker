@@ -75,15 +75,17 @@ const handleLogin = (req, res) => {
   const validation = users.validateUser(username, password);
 
   if (validation.username && validation.password) {
-    res.cookie("userId", `${username}-${password}`);
+    res
+      .cookie("userId", `${username}-${password}`)
+      .redirect("/calorie-tracker");
+    return;
   }
 
-  res.json({ location: "/calorie-tracker", ...validation });
+  res.json(validation);
 };
 
 const serveSignupPage = (req, res) => {
   const pwd = process.env.PWD;
-
   res.sendFile(`${pwd}/private/pages/signup.html`);
 };
 
