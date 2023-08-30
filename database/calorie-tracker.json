@@ -1,1 +1,28 @@
-[{"history":[],"id":"sourov-12345","remainingTarget":0}]
+[
+  {
+    "history": [],
+    "id": "sourov-12345",
+    "remainingTarget": 0
+  },
+  {
+    "history": [],
+    "id": "riya-12345",
+    "remainingTarget": 0
+  },
+  {
+    "history": [
+      {
+        "pushup": 10,
+        "running": 20,
+        "squat": 12
+      },
+      {
+        "pushup": 1,
+        "running": 2,
+        "squat": 3
+      }
+    ],
+    "id": "milan-12345",
+    "remainingTarget": 887
+  }
+]

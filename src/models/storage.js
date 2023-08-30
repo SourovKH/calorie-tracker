@@ -9,19 +9,23 @@ class Storage {
     this.#calorieTrackerDatabasePath = "./database/calorie-tracker.json";
   }
 
-  storeUserDetails(userDetails, onStore) {
-    const content = JSON.stringify(userDetails);
+  storeUserDetails(userDetails) {
+    return new Promise((res, rej) => {
+      const content = JSON.stringify(userDetails, null, 2);
 
-    this.#fs.writeFile(this.#userDatabasePath, content, () => {
-      onStore();
+      this.#fs.writeFile(this.#userDatabasePath, content, () => {
+        res();
+      });
     });
   }
 
-  storeTrackerDetails(calorieTrackerDetails, onStore) {
-    const content = JSON.stringify(calorieTrackerDetails);
+  storeTrackerDetails(calorieTrackerDetails) {
+    return new Promise((res, rej) => {
+      const content = JSON.stringify(calorieTrackerDetails, null, 2);
 
-    this.#fs.writeFile(this.#calorieTrackerDatabasePath, content, () => {
-      onStore();
+      this.#fs.writeFile(this.#calorieTrackerDatabasePath, content, () => {
+        res();
+      });
     });
   }
 

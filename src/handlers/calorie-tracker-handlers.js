@@ -18,11 +18,10 @@ const storeUserAndTrackerDetails = (req, _, onStore) => {
   const userDetails = users.getUserDetails();
   const trackerDetails = calorieTrackers.getTrackerDetails();
 
-  storage.storeUserDetails(userDetails, () => {
-    storage.storeTrackerDetails(trackerDetails, () => {
-      onStore();
-    });
-  });
+  storage
+    .storeUserDetails(userDetails)
+    .then(() => storage.storeTrackerDetails(trackerDetails))
+    .then(onStore);
 };
 
 const updateExerciseHistory = (req, res) => {

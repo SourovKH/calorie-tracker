@@ -1,1 +1,17 @@
-[{"username":"sourov","password":"12345","userId":"sourov-12345"}]
+[
+  {
+    "username": "sourov",
+    "password": "12345",
+    "userId": "sourov-12345"
+  },
+  {
+    "username": "riya",
+    "password": "12345",
+    "userId": "riya-12345"
+  },
+  {
+    "username": "milan",
+    "password": "12345",
+    "userId": "milan-12345"
+  }
+]
