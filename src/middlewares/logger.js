@@ -1,6 +1,6 @@
 const logger = (req, res, next) => {
-  const { url, method, headers } = req;
-  console.log({ url, method, headers });
+  const { url, method } = req;
+  console.log({ url, method });
   next();
 };
 

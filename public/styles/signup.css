@@ -24,7 +24,7 @@ header a {
   color: white;
 }
 
-#login-area {
+#signup-area {
   height: 380px;
   width: 380px;
   margin: 200px auto;
@@ -39,7 +39,7 @@ header a {
   border: 1px solid black;
 }
 
-#login-area > h1 {
+#signup-area > h1 {
   font-size: 30px;
 }
 
@@ -83,7 +83,6 @@ form {
 }
 
 #invalid-message {
-  text-align: center;
   color: red;
   height: 20px;
 }

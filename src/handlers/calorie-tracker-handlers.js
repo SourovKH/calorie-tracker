@@ -54,7 +54,7 @@ const serveTrackingPage = (req, res) => {
   const { cookies } = req;
 
   if (!cookies.userId) {
-    res.redirect(301, "/login");
+    res.redirect(302, "/login");
     return;
   }
 
@@ -102,7 +102,7 @@ const registerUser = (req, res) => {
 
   storeUserAndTrackerDetails(req, res, () => {
     res.cookie("userId", `${username}-${password}`);
-    res.redirect(303, "/calorie-tracker");
+    res.redirect(303, "/");
   });
 };
 

@@ -1,7 +1,7 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const logger = require("./middlewares/logger");
-const parseCookie = require("./middlewares/cookie-parser");
 const {
   updateExerciseHistory,
   getHistory,
@@ -22,7 +22,7 @@ const createApp = (users, calorieTrackers, storage) => {
 
   app.use(logger);
   app.use(express.json());
-  app.use(parseCookie);
+  app.use(cookieParser());
   app.use(express.urlencoded());
 
   app.get("/login", serveLoginPage);

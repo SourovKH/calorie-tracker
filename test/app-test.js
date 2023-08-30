@@ -71,7 +71,7 @@ describe("GET /calorie-tracker", () => {
 
     request(app)
       .get("/calorie-tracker")
-      .expect(301)
+      .expect(302)
       .expect("content-type", /plain/)
       .end(done);
   });
@@ -203,7 +203,7 @@ describe("POST /signup", () => {
       .post("/signup")
       .send({ username: "skh", password: "s1234" })
       .expect(303)
-      .expect("location", "/calorie-tracker")
+      .expect("location", "/")
       .end(done);
   });
 });

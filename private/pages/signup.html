@@ -2,18 +2,27 @@
 
 <head>
   <title>Signup</title>
-  <link rel="stylesheet" href="/styles/login.css">
+  <link rel="stylesheet" href="/styles/signup.css">
 </head>
 
 <body>
-  <section id="login-area">
+  <header>
+    <h1><a href="/">Calorie Tracker</a></h1>
+  </header>
+  <main id="signup-area">
     <h1>Signup</h1>
     <form action="/signup" method="post">
-      <input type="text" name="username" placeholder="username" id="username-box" autofocus>
-      <input type="password" id="password-box" name="password" placeholder="password">
-      <input type="submit" id="submit-button" value="Signup">
+      <div id="input-area">
+        <input type="text" name="username" placeholder="Username" id="username-box" autofocus>
+        <input type="password" id="password-box" name="password" placeholder="Password">
+        <span id="invalid-message"></span>
+      </div>
+      <div>
+        <input type="submit" id="submit-button" value="Signup">
+        <span>Already have an account? <a href="/login">login here</a></span>
+      </div>
     </form>
-  </section>
+  </main>
 </body>
 
 </html>

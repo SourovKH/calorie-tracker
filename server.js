@@ -38,7 +38,7 @@ const main = () => {
   const app = createApp(users, calorieTrackers, storage);
   const port = 8000;
 
-  app.listen(8000, () => console.log("listening on port", port));
+  app.listen(port, () => console.log("listening on port", port));
 };
 
 main();
